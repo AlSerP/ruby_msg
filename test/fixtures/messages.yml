@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  user_by: 1
+  dialogue_by: 1
+  text: MyString
+  time: MyString
+
+two:
+  id: 1
+  user_by: 1
+  dialogue_by: 1
+  text: MyString
+  time: MyString

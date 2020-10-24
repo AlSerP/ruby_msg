@@ -1,0 +1,57 @@
+<!--<ul>-->
+<%# @messages.each do |message| %>
+<!--    <li><span><%#= message.text %></span> <span><%#= message.time %></span> <span><%#= message.user_by %></span></li>-->
+<%# end %>
+<!--</ul>-->
+
+<div class="wrapper">
+  <div class="dialogues_list">
+    <% @dialogues.each do |dialogue| %>
+      <% if dialogue.user1 == current_user.id %>
+        <div class="dialogue_element">
+          <div class="user_avatar"></div>
+          <div class="user_name">
+            <h6><%= User.find(dialogue.user2).email %></h6>
+            <span class="l_cont"><a class="last_msg" href="/dialogue/<%= dialogue.id %>">
+              <% if dialogue.messages.last %>
+                <%= dialogue.messages.last.text %>
+              <% else %>
+                No messages
+              <% end %>
+            </a></span>
+          </div>
+          <div class="write"></div>
+        </div>
+      <% else %>
+        <div class="dialogue_element">
+          <div class="user_avatar"></div>
+          <div class="user_name">
+            <h6><%= User.find(dialogue.user1).email %></h6>
+            <span class="l_cont"><a class="last_msg" href="/dialogue/<%= dialogue.id %>">
+              <% if dialogue.messages.last %>
+                <%= dialogue.messages.last.text %>
+              <% else %>
+                No messages
+              <% end %>
+            </a></span>
+          </div>
+          <div class="write"></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="messages_box">
+    <%= react_component("MessageApp", {messages: @messages, csrf_token: form_authenticity_token, dialogue_id: @dialogue.id, opponent: @opponent, user_id: current_user.id}) %>
+  </div>
+</div>
+
+<!--<div class="col-md-8">-->
+<!--  <form action="/dialogue/<%#= @dialogue.id %>/send" method="POST" id="send_message">-->
+<!--    <div class="form-group">-->
+<!--      <label for="exampleFormControlTextarea1">Send your msg</label>-->
+<!--      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="message[text]"></textarea>-->
+<!--    </div>-->
+<%#= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<!--    <button type="submit" class="btn btn-success">Send</button>-->
+<!--  </form>-->
+<!--</div>-->

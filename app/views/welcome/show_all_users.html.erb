@@ -1,0 +1,5 @@
+<ul>
+  <% @users.each do |user| %>
+    <li><%= user.email %> <a href="/dialogue/start/<%= user.id %>">Write</a></li>
+  <% end %>
+</ul>

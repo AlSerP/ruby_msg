@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "chat" %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/dialogues">Dialogues</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <% if signed_in? %>
+        <span><%= current_user.email %></span>
+        <%= link_to 'Sign out', sign_out_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Sign in', sign_in_path %>
+      <% end %>
+      <%# if signed_in? %>
+<!--        <span><%#= current_user.email %></span>-->
+<!--        <a href="<%#= sign_out_path %>" class="btn btn-success">Sign out</a>-->
+      <%# else %>
+<!--        <a href="<%#= sign_in_path %>" class="btn btn-success">Sign out</a>-->
+      <%# end %>
+    </div>
+  </div>
+</nav>
+<%= yield %>
+</body>
+</html>

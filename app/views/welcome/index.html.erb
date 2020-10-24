@@ -1,0 +1,7 @@
+<h1>Welcome Page</h1>
+<a href="/users">All users list</a>
+<% if signed_in? %>
+  <a href="/dialogues"><br>Your dialogues</a>
+<% else %>
+  <p>Sing in to start chat</p>
+<% end %>

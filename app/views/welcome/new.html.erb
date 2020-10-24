@@ -1,0 +1,10 @@
+<div class="col-md-8">
+  <form action="/" method="POST" id="send_message">
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Send your msg</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="message[text]"></textarea>
+    </div>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <button type="submit" class="btn btn-success">Send</button>
+  </form>
+</div>
