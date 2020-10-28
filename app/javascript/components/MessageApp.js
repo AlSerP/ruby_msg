@@ -33,7 +33,7 @@ class MessageApp extends React.Component {
         let messages = this.state.messages;
 
         $.ajax({
-            url: "/dialogue/" + this.props.dialogue_id + "/send",
+            url: "/dialogues/send?dia=" + this.props.dialogue_id,
             dataType: 'json',
             type: 'POST',
             data: message,
@@ -54,7 +54,7 @@ class MessageApp extends React.Component {
         let last_message = messages[max_id];
 
         $.ajax({
-            url: "/dialogue/" + this.props.dialogue_id + "/update",
+            url: "/dialogues/update?dia=" + this.props.dialogue_id,
             dataType: 'json',
             type: 'GET',
             data: {

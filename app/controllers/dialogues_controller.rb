@@ -2,7 +2,7 @@ class DialoguesController < ApplicationController
   def index; end
 
   def send_msg
-    dialogue = Dialogue.find(params['id'])
+    dialogue = Dialogue.find(params['dia'])
     print params
     dialogue.messages.create(order_params)
 
@@ -14,7 +14,7 @@ class DialoguesController < ApplicationController
   end
 
   def update_message
-    dialogue = Dialogue.find(params['id'])
+    dialogue = Dialogue.find(params['dia'])
     if current_user.id == dialogue.user1 || current_user.id == dialogue.user2
       if params['last_message']
         print params['last_message']['time']
@@ -56,17 +56,21 @@ class DialoguesController < ApplicationController
   end
 
   def show
-    @dialogue = Dialogue.find(params['id'])
     @dialogues = user_dialogues
-    if check_user current_user, @dialogue
-      @messages = @dialogue.messages
-      @opponent = if @dialogue.user1 != current_user.id
-                    User.find(@dialogue.user1).email
-                  else
-                    User.find(@dialogue.user2).email
-                  end
+    if params['dia']
+      @dialogue = Dialogue.find(params['dia'])
+      if check_user current_user, @dialogue
+        @messages = @dialogue.messages
+        @opponent = if @dialogue.user1 != current_user.id
+                      User.find(@dialogue.user1).email
+                    else
+                      User.find(@dialogue.user2).email
+                    end
+      else
+        render_403
+      end
     else
-      render_403
+      render 'welcome/user_dialogues'
     end
   end
 
@@ -83,7 +87,7 @@ class DialoguesController < ApplicationController
   def start_dialogue
     dialogue = check_dialogue current_user, User.find(params['id'])
 
-    redirect_to '/dialogue/' + dialogue.id.to_s + '/show'
+    redirect_to '/dialogues?dia=' + dialogue.id.to_s
   end
 
   def render_404

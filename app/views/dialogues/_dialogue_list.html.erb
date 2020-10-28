@@ -1,0 +1,35 @@
+<div class="dialogues_list">
+  <% @dialogues.each do |dialogue| %>
+    <% if dialogue.user1 == current_user.id %>
+      <div class="dialogue_element">
+        <div class="user_avatar"></div>
+        <div class="user_name">
+          <h6><%= User.find(dialogue.user2).email %></h6>
+          <span class="l_cont"><a class="last_msg" href="/dialogues?dia=<%= dialogue.id %>" onclick={}>
+              <% if dialogue.messages.last %>
+                <%= dialogue.messages.last.text %>
+              <% else %>
+                No messages
+              <% end %>
+            </a></span>
+        </div>
+        <div class="write"></div>
+      </div>
+    <% else %>
+      <div class="dialogue_element">
+        <div class="user_avatar"></div>
+        <div class="user_name">
+          <h6><%= User.find(dialogue.user1).email %></h6>
+          <span class="l_cont"><a class="last_msg" href="/dialogues?dia=<%= dialogue.id %>">
+              <% if dialogue.messages.last %>
+                <%= dialogue.messages.last.text %>
+              <% else %>
+                No messages
+              <% end %>
+            </a></span>
+        </div>
+        <div class="write"></div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
